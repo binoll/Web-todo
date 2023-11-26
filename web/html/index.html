@@ -6,9 +6,10 @@
 </div>
 <div id="addTab" class="tab-content">
     <h2>ADD TASKS</h2>
-    <form id="addForm">
-        <label for="taskInput"></label><input type="text" id="taskInput" placeholder="Enter task" required>
-        <button type="button" onclick="addTask()">ADD</button>
+    <form id="addForm" action="/add" method="post">
+        <label for="taskInput"></label>
+            <input type="text" name="task" id="taskInput" placeholder="Enter task" required>
+            <button type="submit">ADD</button>
     </form>
 </div>
 <div id="listTab" class="tab-content">
