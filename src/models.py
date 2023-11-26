@@ -7,14 +7,14 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class Todo(Base):
+class Task(Base):
 	"""
-    Todo model
+    Task model
     """
-	__tablename__ = 'todos'
+	__tablename__ = 'tasks'
 	id = Column(Integer, primary_key=True)
-	task = Column(Text)
+	text = Column(Text)
 	completed = Column(Boolean, default=False)
 
 	def __repr__(self):
-		return f'<Todo {self.id}>'
+		return f'<Task {self.id}>'

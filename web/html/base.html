@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO</title>
-    <link rel="stylesheet" href="{{ url_for('css', path='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('web', path='css/main.css') }}">
 </head>
 <body>
 <h1 style="text-align: center">TODO</h1>
 {% block content %}
 {% endblock %}
-<script src="{{ url_for('js', path='js/script.js') }}"></script>
+<script src="{{ url_for('web', path='js/script.js') }}"></script>
 </body>
 </html>
