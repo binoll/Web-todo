@@ -1,0 +1,5 @@
+database/db.sqlite
+.idea/*
+src/__pycache__
+.pytest_cache
+.coverage
