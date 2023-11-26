@@ -12,7 +12,3 @@ function showTab(tabId) {
         }
     });
 }
-
-function toggleTask() {
-    this.classList.toggle('completed');
-}

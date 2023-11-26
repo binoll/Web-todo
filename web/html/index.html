@@ -14,6 +14,16 @@
 </div>
 <div id="listTab" class="tab-content">
     <h2>LIST TASKS</h2>
-    <ul id="taskList"></ul>
+    {% for task in tasks %}
+        {% if task.completed %}
+            <ul id="taskList-completed">
+                <li class="task-completed">{{ task.text }}</li>
+            </ul>
+        {% else %}
+            <ul id="taskList">
+                <li class="task">{{ task.text }}</li>
+            </ul>
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}
