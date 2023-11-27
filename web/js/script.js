@@ -1,14 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-    showTab('addTab');
-});
+document.getElementById("taskList").addEventListener("click", function(event) {
+    var clickedElement = event.target;
 
-function showTab(tabId) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => {
-        if (tab.id === tabId) {
-            tab.style.display = 'block';
-        } else {
-            tab.style.display = 'none';
-        }
-    });
-}
+    if (clickedElement.classList.contains("task") || clickedElement.classList.contains("task-completed")) {
+        clickedElement.classList.toggle("task-completed");
+    }
+});
