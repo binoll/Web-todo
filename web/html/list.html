@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="listTab" class="tab-content">
+<div id="taskList" class="tab-content">
     <h2>LIST TASKS</h2>
     {% for task in tasks %}
-        {% if task.completed %}
-            <ul id="taskList-completed">
-                <li class="task-completed">{{ task.text }}</li>
-            </ul>
-        {% else %}
-            <ul id="taskList">
-                <li class="task">{{ task.text }}</li>
-            </ul>
-        {% endif %}
+    {% if task.completed %}
+    <ul class="border">
+        <li class="task-completed" onclick="toggleTask()">{{ task.text }}</li>
+    </ul>
+    {% else %}
+    <ul class="border">
+        <li class="task" onclick="toggleTask()">{{ task.text }}</li>
+    </ul>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

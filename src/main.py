@@ -31,6 +31,18 @@ async def home(request: Request,
 	return templates.TemplateResponse('index.html', {'request': request, 'tasks': task})
 
 
+@app.get('/list')
+async def list(request: Request,
+               database: Session = Depends(get_db)) -> templates.TemplateResponse:
+	"""
+	List page
+    """
+	logger.info('Opening list page')
+	task = database.query(models.Task).order_by(models.Task.id.desc())
+
+	return templates.TemplateResponse('list.html', {'request': request, 'tasks': task})
+
+
 @app.post('/add')
 async def add(task: str = Form(default='', max_length=500),
               database: Session = Depends(get_db)) -> RedirectResponse:

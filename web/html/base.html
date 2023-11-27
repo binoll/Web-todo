@@ -8,7 +8,17 @@
     <link rel="stylesheet" href="{{ url_for('web', path='css/main.css') }}">
 </head>
 <body>
-<h1 style="text-align: center">TODO</h1>
+<div class="title">
+    <h1>TODO</h1>
+</div>
+<div class="navigation">
+    <form action="/" method="get">
+        <button class="button">ADD TASKS</button>
+    </form>
+    <form action="/list" method="get">
+        <button class="button">LIST TASKS</button>
+    </form>
+</div>
 {% block content %}
 {% endblock %}
 <script src="{{ url_for('web', path='js/script.js') }}"></script>

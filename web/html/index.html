@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="tabs">
-    <button onclick="showTab('addTab')">ADD TASKS</button>
-    <button onclick="showTab('listTab')">LIST TASKS</button>
-</div>
-<div id="addTab" class="tab-content">
+<div id="taskInput" class="tab-content">
     <h2>ADD TASKS</h2>
-    <form id="addForm" action="/add" method="post">
-        <label for="taskInput"></label>
-            <input type="text" name="task" id="taskInput" placeholder="Enter task" required>
-            <button type="submit">ADD</button>
+    <form class="forms" action="/add" method="post">
+        <input type="text" name="task" placeholder="Enter task" required>
+        <button class="button">ADD</button>
     </form>
 </div>
 {% endblock %}
