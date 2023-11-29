@@ -87,7 +87,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 70%;
+    width: 68%;
 }
 
 .task-completed {
@@ -127,7 +127,7 @@ input {
     transition: background-color 0.3s;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-left: 8px;
+    margin-left: 13px;
 }
 
 .edit-button:hover, .delete-button:hover {
