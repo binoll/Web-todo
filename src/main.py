@@ -3,7 +3,7 @@ Main
 """
 import src.models as models
 
-from fastapi import FastAPI, Request, Depends, Form, status
+from fastapi import FastAPI, Request, Depends, Form, Path, status
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
@@ -56,4 +56,37 @@ async def add(task: str = Form(default='', max_length=500),
 	database.commit()
 
 	return RedirectResponse(url=app.url_path_for('home'),
+	                        status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.get('/edit/{task_id}')
+async def edit_get(request: Request,
+                   database: Session = Depends(get_db),
+                   task_id: int = Path(gt=0)) -> RedirectResponse:
+	"""
+	Edit existed task
+	"""
+	task = database.query(models.Task).filter(models.Task.id == task_id).first()
+
+	logger.info(f'Editing task: {task}.')
+
+	return templates.TemplateResponse('edit.html',
+	                                  {'request': request, 'task': task})
+
+
+@app.post('/edit/{task_id}')
+async def edit_post(task_id: int = Path(gt=0),
+                    database: Session = Depends(get_db),
+                    text: str = Form(default='', max_length=500)):
+	"""
+	Edit existed task
+	"""
+	task = database.query(models.Task).filter(models.Task.id == task_id).first()
+
+	if text:
+		task.text = text
+
+	database.commit()
+
+	return RedirectResponse(url=app.url_path_for('list'),
 	                        status_code=status.HTTP_303_SEE_OTHER)

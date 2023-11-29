@@ -81,12 +81,13 @@ body {
 }
 
 .task {
-    margin-bottom: 10px;
+    display: flex;
     cursor: pointer;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 68%;
 }
 
 .task-completed {
@@ -95,9 +96,9 @@ body {
 }
 
 .border {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 input {
@@ -107,4 +108,28 @@ input {
     border-radius: 5px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.border form {
+    display: flex;
+    float: right;
+}
+
+.edit-button, .delete-button {
+    display: flex;
+    flex: auto;
+    padding: 8px;
+    width: 10%;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 13px;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #555;
 }

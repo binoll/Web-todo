@@ -4,13 +4,33 @@
     <h2>LIST TASKS</h2>
     {% for task in tasks %}
     {% if task.completed %}
-    <ul class="border">
-        <li class="task-completed" onclick="toggleTask()">{{ task.text }}</li>
-    </ul>
+    <div class="border">
+        <div class="task-completed" onclick="toggleTask()">
+            {{ task.text }}
+        </div>
+        <div>
+            <form action="/edit/{{ task.id }}" method="get">
+                <button class="edit-button">EDIT</button>
+            </form>
+            <form action="/delete/{{ task.id }}" method="post">
+                <button class="delete-button">DELETE</button>
+            </form>
+        </div>
+    </div>
     {% else %}
-    <ul class="border">
-        <li class="task" onclick="toggleTask()">{{ task.text }}</li>
-    </ul>
+    <div class="border">
+        <div class="task" onclick="toggleTask()">
+            {{ task.text }}
+        </div>
+        <div>
+            <form action="/edit/{{ task.id }}" method="get">
+                <button class="edit-button">EDIT</button>
+            </form>
+            <form action="/delete/{{ task.id }}" method="post">
+                <button class="delete-button">DELETE</button>
+            </form>
+        </div>
+    </div>
     {% endif %}
     {% endfor %}
 </div>
