@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="taskList" class="tab-content">
+<div id="taskInput" class="tab-content">
     <h2>EDIT TASK</h2>
     <form class="forms" action="/add" method="post">
         <input type="text" name="task" placeholder="Enter task" required>
-        <button class="button">ADD</button>
+        <button class="button">EDIT</button>
     </form>
 </div>
 {% endblock %}
