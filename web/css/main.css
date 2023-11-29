@@ -81,6 +81,7 @@ body {
 }
 
 .task {
+    display: flex;
     margin-bottom: 10px;
     cursor: pointer;
     padding: 10px;
@@ -95,9 +96,7 @@ body {
 }
 
 .border {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    display: flex;
 }
 
 input {
@@ -107,4 +106,35 @@ input {
     border-radius: 5px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.border form {
+    float: right;
+    display: flex;
+}
+
+.div-edit-delete {
+    float: right;
+}
+
+.edit-button, .delete-button {
+    display: flex;
+    flex: auto;
+    padding: 10px;
+    width: 15%;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #555;
+}
+
+.edit-button {
+    margin-left: 10px;
 }
