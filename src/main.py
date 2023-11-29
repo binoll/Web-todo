@@ -70,5 +70,5 @@ async def edit_get(request: Request,
 
 	logger.info(f'Editing task: {task}.')
 
-	return templates.TemplateResponse("edit.html",
-	                                  {"request": request, "task": task})
+	return templates.TemplateResponse('edit.html',
+	                                  {'request': request, 'task': task})
