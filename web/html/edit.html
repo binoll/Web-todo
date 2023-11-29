@@ -2,8 +2,8 @@
 {% block content %}
 <div id="taskInput" class="tab-content">
     <h2>EDIT TASK</h2>
-    <form class="forms" action="/add" method="post">
-        <input type="text" name="task" placeholder="Enter task" required>
+    <form class="forms" action="/edit/{{ task.id }}" method="post">
+        <input type="text" name="text" placeholder="Enter task" required>
         <button class="button">EDIT</button>
     </form>
 </div>
