@@ -17,4 +17,4 @@ class Task(Base):
 	completed = Column(Boolean, default=False)
 
 	def __repr__(self):
-		return f'<Task {self.id}>'
+		return f'Task {self.id}'

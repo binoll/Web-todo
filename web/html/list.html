@@ -8,7 +8,7 @@
         <div class="task-completed" onclick="toggleTask()">
             {{ task.text }}
         </div>
-        <div class="div-edit-delete">
+        <div>
             <form action="/edit/{{ task.id }}" method="get">
                 <button class="edit-button">EDIT</button>
             </form>
@@ -22,7 +22,7 @@
         <div class="task" onclick="toggleTask()">
             {{ task.text }}
         </div>
-        <div class="div-edit-delete">
+        <div>
             <form action="/edit/{{ task.id }}" method="get">
                 <button class="edit-button">EDIT</button>
             </form>
