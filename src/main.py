@@ -105,7 +105,10 @@ async def edit_post(task_id: int = Path(gt=0),
 	logger.info(f'Deleting the task: {task}.')
 
 	if task is None:
-		logger.warning(f'This task doesn\'t exist: {task_id}.')
+		logger.warning(f'This task doesn\'t exist: {task}.')\
+
+		return RedirectResponse(url=app.url_path_for('list'),
+		                        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 	database.delete(task)
 	database.commit()
