@@ -51,7 +51,7 @@ async def add(task: str = Form(default='', max_length=500),
 	"""
 	task = models.Task(text=task)
 
-	logger.info(f'Creating task: {task.text}')
+	logger.info(f'Creating task: {task}')
 	database.add(task)
 	database.commit()
 
@@ -83,9 +83,31 @@ async def edit_post(task_id: int = Path(gt=0),
 	"""
 	task = database.query(models.Task).filter(models.Task.id == task_id).first()
 
+	logger.info(f'The task has been changed: {task}.')
+
 	if text:
 		task.text = text
 
+	database.commit()
+
+	return RedirectResponse(url=app.url_path_for('list'),
+	                        status_code=status.HTTP_303_SEE_OTHER)
+
+
+@app.get('/delete/{task_id}')
+async def edit_post(task_id: int = Path(gt=0),
+                    database: Session = Depends(get_db)):
+	"""
+	Delete existed task
+	"""
+	task = database.query(models.Task).filter(models.Task.id == task_id).first()
+
+	logger.info(f'Deleting the task: {task}.')
+
+	if task is None:
+		logger.warning(f'This task doesn\'t exist: {task_id}.')
+
+	database.delete(task)
 	database.commit()
 
 	return RedirectResponse(url=app.url_path_for('list'),
