@@ -28,7 +28,7 @@ async def home(request: Request,
 	logger.info('Opening home page')
 	task = database.query(models.Task).order_by(models.Task.id.desc())
 
-	return templates.TemplateResponse('index.html', {'request': request, 'tasks': task})
+	return templates.TemplateResponse('add.html', {'request': request, 'tasks': task})
 
 
 @app.get('/list')
