@@ -5,7 +5,7 @@
     {% for task in tasks %}
     {% if task.completed %}
     <div class="border">
-        <div class="task-completed" onclick="toggleTask()">
+        <div class="task-completed" onclick="toggleTask({{ task.id }})">
             {{ task.text }}
         </div>
         <div>
@@ -19,7 +19,7 @@
     </div>
     {% else %}
     <div class="border">
-        <div class="task" onclick="toggleTask()">
+        <div class="task" onclick="toggleTask({{ task.id }})">
             {{ task.text }}
         </div>
         <div>
