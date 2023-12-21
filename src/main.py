@@ -44,8 +44,8 @@ async def list(request: Request,
 
 
 @app.post('/add')
-async def add(task: str = Form(default='', max_length=500),
-              database: Session = Depends(get_db)) -> RedirectResponse:
+async def add(database: Session = Depends(get_db),
+              task: str = Form(default='', max_length=500)) -> RedirectResponse:
 	"""
 	Add new task
 	"""
@@ -75,8 +75,8 @@ async def edit_get(request: Request,
 
 
 @app.post('/edit/{task_id}')
-async def edit_post(task_id: int = Path(gt=0),
-                    database: Session = Depends(get_db),
+async def edit_post(database: Session = Depends(get_db),
+                    task_id: int = Path(gt=0),
                     text: str = Form(default='', max_length=500),
                     completed: bool = Form(default=False)):
 	"""
