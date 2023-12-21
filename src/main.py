@@ -44,8 +44,8 @@ async def list(request: Request,
 
 
 @app.post('/add')
-async def add(task: str = Form(default='', max_length=500),
-              database: Session = Depends(get_db)) -> RedirectResponse:
+async def add(database: Session = Depends(get_db),
+              task: str = Form(default='', max_length=500)) -> RedirectResponse:
 	"""
 	Add new task
 	"""
@@ -75,9 +75,10 @@ async def edit_get(request: Request,
 
 
 @app.post('/edit/{task_id}')
-async def edit_post(task_id: int = Path(gt=0),
-                    database: Session = Depends(get_db),
-                    text: str = Form(default='', max_length=500)):
+async def edit_post(database: Session = Depends(get_db),
+                    task_id: int = Path(gt=0),
+                    text: str = Form(default='', max_length=500),
+                    completed: bool = Form(default=False)):
 	"""
 	Edit existed task
 	"""
@@ -87,6 +88,11 @@ async def edit_post(task_id: int = Path(gt=0),
 
 	if text:
 		task.text = text
+
+	if completed:
+		task.completed = True
+	else:
+		task.completed = False
 
 	database.commit()
 
@@ -105,8 +111,7 @@ async def edit_post(task_id: int = Path(gt=0),
 	logger.info(f'Deleting the task: {task}.')
 
 	if task is None:
-		logger.warning(f'This task doesn\'t exist: {task}.')\
-
+		logger.warning(f'This task doesn\'t exist: {task}.')
 		return RedirectResponse(url=app.url_path_for('list'),
 		                        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 

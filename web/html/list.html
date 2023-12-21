@@ -3,11 +3,16 @@
 <div id="taskList" class="tab-content">
     <h2>LIST TASKS</h2>
     {% for task in tasks %}
-    {% if task.completed %}
     <div class="border">
-        <div class="task-completed" onclick="toggleTask()">
+        {% if task.completed %}
+        <div class="task task-completed" onclick="toggleTask('{{ task.id }}', '{{ task.completed }}')">
             {{ task.text }}
         </div>
+        {% else %}
+        <div class="task" onclick="toggleTask('{{ task.id }}', '{{ task.completed }}')">
+            {{ task.text }}
+        </div>
+        {% endif %}
         <div>
             <form action="/edit/{{ task.id }}" method="get">
                 <button class="edit-button">EDIT</button>
@@ -17,21 +22,6 @@
             </form>
         </div>
     </div>
-    {% else %}
-    <div class="border">
-        <div class="task" onclick="toggleTask()">
-            {{ task.text }}
-        </div>
-        <div>
-            <form action="/edit/{{ task.id }}" method="get">
-                <button class="edit-button">EDIT</button>
-            </form>
-            <form action="/delete/{{ task.id }}" method="get">
-                <button class="delete-button">DELETE</button>
-            </form>
-        </div>
-    </div>
-    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

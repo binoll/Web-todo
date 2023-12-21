@@ -1,7 +1,16 @@
-document.getElementById("taskList").addEventListener("click", function(event) {
-    var clickedElement = event.target;
+function toggleTask(id, complete) {
+	let new_completed = complete === 'True' ? 'False' : 'True';
+	let newForm = new FormData();
 
-    if (clickedElement.classList.contains("task") || clickedElement.classList.contains("task-completed")) {
-        clickedElement.classList.toggle("task-completed");
-    }
-});
+	newForm.append("completed", new_completed);
+
+	fetch(`/edit/${id}`, {
+		method: "POST",
+		body: newForm
+	})
+		.then(response => response.formData());
+
+	setTimeout(function () {
+		location.reload();
+	}, 50);
+}
