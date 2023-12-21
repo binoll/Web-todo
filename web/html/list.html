@@ -6,11 +6,11 @@
     <div class="border">
         {% if task.completed %}
         <div class="task task-completed" onclick="toggleTask('{{ task.id }}', '{{ task.completed }}')">
-            {{ task.text }}
+            {{ task.title }}
         </div>
         {% else %}
         <div class="task" onclick="toggleTask('{{ task.id }}', '{{ task.completed }}')">
-            {{ task.text }}
+            {{ task.title }}
         </div>
         {% endif %}
         <div>

@@ -13,7 +13,8 @@ class Task(Base):
     """
 	__tablename__ = 'tasks'
 	id = Column(Integer, primary_key=True)
-	text = Column(Text)
+	title = Column(Text)
+	description = Column(Text)
 	completed = Column(Boolean, default=False)
 
 	def __repr__(self):

@@ -3,7 +3,9 @@
 <div id="taskInput" class="tab-content">
     <h2>EDIT TASK</h2>
     <form class="forms" action="/edit/{{ task.id }}" method="post">
-        <input type="text" name="text" placeholder="Enter task" required>
+        <input type="text" name="title" placeholder="Enter title of task..." required>
+        <textarea class="textarea" rows="12" cols="50" minlength="1" maxlength="10000" type="text" name="description"
+                  placeholder="Enter description of task..."></textarea>
         <button class="button">EDIT</button>
     </form>
 </div>
