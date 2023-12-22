@@ -1,7 +1,9 @@
 """
 Main
 """
-from fastapi import FastAPI, Request, Depends, Form, Path, status, HTTPException
+import math
+
+from fastapi import FastAPI, Request, Depends, Form, Path, status, HTTPException, Query
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -34,14 +36,22 @@ async def home(request: Request,
 
 @app.get('/list')
 async def list(request: Request,
-               database: Session = Depends(get_db)) -> templates.TemplateResponse:
+               database: Session = Depends(get_db),
+               page: int = Query(default=0, ge=0),
+               page_limit: int = Query(default=10, gt=0)) -> templates.TemplateResponse:
 	"""
 	List page
     """
-	logger.info('Opening list page')
-	task = database.query(models.Task).order_by(models.Task.id.desc())
+	tasks = database.query(models.Task).order_by(models.Task.id.desc())
+	total_tasks = tasks.count()
+	total_pages = math.ceil(total_tasks / page_limit)
 	
-	return templates.TemplateResponse('list.html', {'request': request, 'tasks': task})
+	start_idx = page * page_limit
+	end_idx = (page + 1) * page_limit
+	tasks_on_page = tasks.slice(start_idx, end_idx).all()
+	
+	return templates.TemplateResponse('list.html', {'request': request, 'tasks': tasks_on_page, 'page': page,
+	                                                'total_pages': total_pages})
 
 
 @app.post('/add')
