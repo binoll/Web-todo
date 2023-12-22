@@ -9,3 +9,8 @@ python3 -m pip install -r requirements.txt
 ```bash
 python3 -m uvicorn src.main:app --reload
 ```
+
+## Generator
+```bash
+python.exe generator/generator.py 
+```
