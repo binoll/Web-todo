@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 import src.models as models
 from src.database import init_db, get_db
+from src.tags import Tags
 
 app = FastAPI()
 templates = Jinja2Templates(directory='web/html')
@@ -28,7 +29,7 @@ async def home(request: Request,
 	logger.info('Opening home page')
 	task = database.query(models.Task).order_by(models.Task.id.desc())
 	
-	return templates.TemplateResponse('add.html', {'request': request, 'tasks': task})
+	return templates.TemplateResponse('add.html', {'request': request, 'tasks': task, 'tags': Tags})
 
 
 @app.get('/list')
@@ -45,16 +46,21 @@ async def list(request: Request,
 
 @app.post('/add')
 async def add(database: Session = Depends(get_db),
-              title: str = Form(default='', max_length=500),
+              title: str = Form(default='', min_length=1, max_length=500),
+              tag: str = Form(default=Tags.plans.name),
               description: str = Form(default='', max_length=10000)) -> RedirectResponse:
 	"""
 	Add new task
 	"""
-	task = models.Task(title=title, description=description)
+	if not title:
+		raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Title field is empty!")
 	
-	logger.info(f'Creating task: {task}')
+	task = models.Task(title=title, description=description, tag=tag)
+	
 	database.add(task)
 	database.commit()
+	
+	logger.info(f'Creating task: {task}')
 	
 	return RedirectResponse(url=app.url_path_for('home'), status_code=status.HTTP_303_SEE_OTHER)
 
@@ -70,9 +76,7 @@ async def edit_get(request: Request,
 	
 	logger.info(f'Editing task: {task}.')
 	
-	return templates.TemplateResponse('edit.html',
-	                                  {'request': request, 'task': task}
-	                                  )
+	return templates.TemplateResponse('edit.html', {'request': request, 'task': task, 'tags': Tags})
 
 
 @app.post('/edit/{id}')
@@ -80,6 +84,7 @@ async def edit_post(database: Session = Depends(get_db),
                     id: int = Path(gt=0),
                     title: str = Form(default='', max_length=500),
                     description: str = Form(default='', max_length=10000),
+                    tag: str = Form(default=Tags.plans.name),
                     completed: bool = Form(default=False)):
 	"""
 	Edit existed task
@@ -95,6 +100,8 @@ async def edit_post(database: Session = Depends(get_db),
 		task.title = title
 	if description:
 		task.description = description
+	if tag:
+		task.tag = tag
 	if completed:
 		task.completed = True
 	else:

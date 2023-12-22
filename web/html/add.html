@@ -4,6 +4,13 @@
     <h2>ADD TASKS</h2>
     <form class="forms" action="/add" method="post">
         <input type="text" name="title" placeholder="Enter title task..." required>
+        <select name="tag">
+            {% for tag in tags %}
+            <option value="{{ tag.name }}">
+                {{ tag.name }}
+            </option>
+            {% endfor %}
+        </select>
         <button class="button">ADD</button>
     </form>
 </div>
