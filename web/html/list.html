@@ -5,11 +5,11 @@
     {% for task in tasks %}
     <div class="border">
         {% if task.completed %}
-        <div class="task task-completed" onclick="toggleTask('{{ task.id }}', '{{ task.completed }}')">
+        <div class="task task-completed" onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}')">
             {{ task.title }}
         </div>
         {% else %}
-        <div class="task" onclick="toggleTask('{{ task.id }}', '{{ task.completed }}')">
+        <div class="task" onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}')">
             {{ task.title }}
         </div>
         {% endif %}
