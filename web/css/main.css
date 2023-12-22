@@ -143,3 +143,32 @@ input {
     resize: none;
     margin-bottom: 20px;
 }
+
+.forms select {
+    flex: auto;
+    padding: 10px;
+    margin: 5px;
+    text-align-last: center;
+    width: 40%;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.forms select:hover {
+    background-color: #555;
+}
+
+.forms select:focus {
+    outline: none;
+    background-color: #555;
+}
+
+.forms select option {
+    background-color: #333;
+    color: #fff;
+}

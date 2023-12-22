@@ -6,6 +6,13 @@
         <input type="text" name="title" placeholder="Enter title of task..." required>
         <textarea class="textarea" rows="12" cols="50" minlength="1" maxlength="10000" type="text" name="description"
                   placeholder="Enter description of task..."></textarea>
+        <select name="tag">
+            {% for tag in tags %}
+            <option value="{{ tag.name }}">
+                {{ tag.name }}
+            </option>
+            {% endfor %}
+        </select>
         <button class="button">EDIT</button>
     </form>
 </div>

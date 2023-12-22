@@ -1,9 +1,10 @@
-function toggleTask(id, title, complete) {
+function toggleTask(id, title, complete, tag) {
 	let new_completed = complete === 'True' ? 'False' : 'True';
 	let newForm = new FormData();
 
 	newForm.append("completed", new_completed);
 	newForm.append("title", title);
+	newForm.append("tag", tag);
 
 	fetch(`/edit/${id}`, {
 		method: "POST",
