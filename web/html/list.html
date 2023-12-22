@@ -10,7 +10,8 @@
             [{{ task.tag }}] {{ task.title }}
         </div>
         {% else %}
-        <div class="task" onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}', '{{ task.tag }}')">
+        <div class="task"
+             onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}', '{{ task.tag }}')">
             [{{ task.tag }}] {{ task.title }}
         </div>
         {% endif %}
@@ -25,4 +26,5 @@
     </div>
     {% endfor %}
 </div>
+<script src="{{ url_for('web', path='js/script.js') }}"></script>
 {% endblock %}
