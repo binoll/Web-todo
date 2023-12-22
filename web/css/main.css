@@ -133,3 +133,13 @@ input {
 .edit-button:hover, .delete-button:hover {
     background-color: #555;
 }
+
+.textarea {
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: text;
+    resize: none;
+    margin-bottom: 20px;
+}
