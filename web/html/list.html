@@ -10,7 +10,8 @@
             [{{ task.tag }}] {{ task.title }}
         </div>
         {% else %}
-        <div class="task" onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}', '{{ task.tag }}')">
+        <div class="task"
+             onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}', '{{ task.tag }}')">
             [{{ task.tag }}] {{ task.title }}
         </div>
         {% endif %}
@@ -24,5 +25,13 @@
         </div>
     </div>
     {% endfor %}
+
+    <div class="navigation">
+        <form action="/list" method="get">
+            <button class="button" name="page" type="submit" value="{{ page - 1 }}" {% if page == 0 %}disabled{% endif %}>PREV</button>
+            <button class="button" name="page" type="submit" value="{{ page + 1 }}" {% if page == total_pages - 1 %}disabled{% endif %}>NEXT</button>
+        </form>
+    </div>
 </div>
+<script src="{{ url_for('web', path='js/script.js') }}"></script>
 {% endblock %}
