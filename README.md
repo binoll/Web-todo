@@ -13,7 +13,7 @@ pip install --user -r requirements.txt
 
 ## Run
 ```bash
-uvicorn source.main:todo_app --reload
+uvicorn src.main:app --reload
 ```
 
 ## Docker
