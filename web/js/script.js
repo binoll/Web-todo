@@ -1,4 +1,4 @@
-function toggleTask(id, title, complete, tag) {
+function toggleTodo(id, title, complete, tag) {
 	let new_completed = complete === 'True' ? 'False' : 'True';
 	let newForm = new FormData();
 

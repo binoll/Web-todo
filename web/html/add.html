@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="taskInput" class="tab-content">
-    <h2>ADD TASKS</h2>
+    <h2>ADD TODOS</h2>
     <form class="forms" action="/add" method="post">
-        <input type="text" name="title" placeholder="Enter title task..." required>
+        <input type="text" name="title" placeholder="Enter title of todo..." required>
         <select name="tag">
             {% for tag in tags %}
             <option value="{{ tag.name }}">

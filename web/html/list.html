@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="taskList" class="tab-content">
-    <h2>LIST TASKS</h2>
-    {% for task in tasks %}
+    <h2>LIST TODOS</h2>
+    {% for todo in todos %}
     <div class="border">
-        {% if task.completed %}
+        {% if todo.completed %}
         <div class="task task-completed"
-             onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}', '{{ task.tag }}')">
-            [{{ task.tag }}] {{ task.title }}
+             onclick="toggleTodo('{{ todo.id }}', '{{ todo.title }}', '{{ todo.completed }}', '{{ todo.tag }}')">
+            [{{ todo.tag }}] {{ todo.title }}
         </div>
         {% else %}
         <div class="task"
-             onclick="toggleTask('{{ task.id }}', '{{ task.title }}', '{{ task.completed }}', '{{ task.tag }}')">
-            [{{ task.tag }}] {{ task.title }}
+             onclick="toggleTodo('{{ todo.id }}', '{{ todo.title }}', '{{ todo.completed }}', '{{ todo.tag }}')">
+            [{{ todo.tag }}] {{ todo.title }}
         </div>
         {% endif %}
         <div>
-            <form action="/edit/{{ task.id }}" method="get">
+            <form action="/edit/{{ todo.id }}" method="get">
                 <button class="edit-button">EDIT</button>
             </form>
-            <form action="/delete/{{ task.id }}" method="get">
+            <form action="/delete/{{ todo.id }}" method="get">
                 <button class="delete-button">DELETE</button>
             </form>
         </div>

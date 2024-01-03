@@ -1,7 +1,7 @@
 FROM python:3.10-slim
 
 COPY requirements.txt /requirements.txt
-COPY source /source
+COPY src /src
 COPY web /web
 
 RUN pip install --no-cache-dir --upgrade -r requirements.txt

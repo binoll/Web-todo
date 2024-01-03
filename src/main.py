@@ -27,11 +27,11 @@ async def home(request: Request,
                database: Session = Depends(get_db)) -> templates.TemplateResponse:
 	"""
 	Main page
-    """
+	"""
 	logger.info('Opening home page')
-	task = database.query(models.Task).order_by(models.Task.id.desc())
+	todo = database.query(models.Todo).order_by(models.Todo.id.desc())
 	
-	return templates.TemplateResponse('add.html', {'request': request, 'tasks': task, 'tags': Tags})
+	return templates.TemplateResponse('add.html', {'request': request, 'todos': todo, 'tags': Tags})
 
 
 @app.get('/list')
@@ -41,16 +41,16 @@ async def list(request: Request,
                page_limit: int = Query(default=10, gt=0)) -> templates.TemplateResponse:
 	"""
 	List page
-    """
-	tasks = database.query(models.Task).order_by(models.Task.id.desc())
-	total_tasks = tasks.count()
-	total_pages = math.ceil(total_tasks / page_limit)
+	"""
+	todo = database.query(models.Todo).order_by(models.Todo.id.desc())
+	total_todos = todo.count()
+	total_pages = math.ceil(total_todos / page_limit)
 	
 	start_idx = page * page_limit
 	end_idx = (page + 1) * page_limit
-	tasks_on_page = tasks.slice(start_idx, end_idx).all()
+	todos_on_page = todo.slice(start_idx, end_idx).all()
 	
-	return templates.TemplateResponse('list.html', {'request': request, 'tasks': tasks_on_page, 'page': page,
+	return templates.TemplateResponse('list.html', {'request': request, 'todos': todos_on_page, 'page': page,
 	                                                'total_pages': total_pages})
 
 
@@ -60,17 +60,17 @@ async def add(database: Session = Depends(get_db),
               tag: str = Form(default=Tags.plans.name),
               description: str = Form(default='', max_length=10000)) -> RedirectResponse:
 	"""
-	Add new task
+	Add new todo
 	"""
 	if not title:
 		raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Title field is empty!")
 	
-	task = models.Task(title=title, description=description, tag=tag)
+	todo = models.Todo(title=title, description=description, tag=tag)
 	
-	database.add(task)
+	database.add(todo)
 	database.commit()
 	
-	logger.info(f'Creating task: {task}')
+	logger.info(f'Creating todo: {todo}')
 	
 	return RedirectResponse(url=app.url_path_for('home'), status_code=status.HTTP_303_SEE_OTHER)
 
@@ -80,13 +80,13 @@ async def edit_get(request: Request,
                    database: Session = Depends(get_db),
                    id: int = Path(gt=0)) -> RedirectResponse:
 	"""
-	Edit existed task
+	Edit existed todo
 	"""
-	task = database.query(models.Task).filter(models.Task.id == id).first()
+	todo = database.query(models.Todo).filter(models.Todo.id == id).first()
 	
-	logger.info(f'Editing task: {task}.')
+	logger.info(f'Editing todo: {todo}.')
 	
-	return templates.TemplateResponse('edit.html', {'request': request, 'task': task, 'tags': Tags})
+	return templates.TemplateResponse('edit.html', {'request': request, 'todos': todo, 'tags': Tags})
 
 
 @app.post('/edit/{id}')
@@ -97,25 +97,25 @@ async def edit_post(database: Session = Depends(get_db),
                     tag: str = Form(default=Tags.plans.name),
                     completed: bool = Form(default=False)):
 	"""
-	Edit existed task
+	Edit existed todo
 	"""
 	if not title:
 		raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Title field is empty!")
 	
-	task = database.query(models.Task).filter(models.Task.id == id).first()
+	todo = database.query(models.Todo).filter(models.Todo.id == id).first()
 	
-	logger.info(f'The task has been changed: {task}.')
+	logger.info(f'The todo has been changed: {todo}.')
 	
 	if title:
-		task.title = title
+		todo.title = title
 	if description:
-		task.description = description
+		todo.description = description
 	if tag:
-		task.tag = tag
+		todo.tag = tag
 	if completed:
-		task.completed = True
+		todo.completed = True
 	else:
-		task.completed = False
+		todo.completed = False
 	
 	database.commit()
 	
@@ -126,17 +126,17 @@ async def edit_post(database: Session = Depends(get_db),
 async def delete(id: int = Path(gt=0),
                  database: Session = Depends(get_db)):
 	"""
-	Delete existed task
+	Delete existed todo
 	"""
-	task = database.query(models.Task).filter(models.Task.id == id).first()
+	todo = database.query(models.Todo).filter(models.Todo.id == id).first()
 	
-	logger.info(f'Deleting the task: {task}.')
+	logger.info(f'Deleting the todo: {todo}.')
 	
-	if task is None:
-		logger.warning(f'This task does not exist: {task}.')
+	if todo is None:
+		logger.warning(f'This todo does not exist: {todo}.')
 		return RedirectResponse(url=app.url_path_for('list'), status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 	
-	database.delete(task)
+	database.delete(todo)
 	database.commit()
 	
 	return RedirectResponse(url=app.url_path_for('list'), status_code=status.HTTP_303_SEE_OTHER)

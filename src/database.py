@@ -1,5 +1,5 @@
 """
-Database for storing tasks
+Database for storing todos
 """
 import os
 
@@ -19,7 +19,7 @@ def init_db():
 	"""
 	if not os.path.exists(DB_PATH) or not os.path.isdir(DB_PATH):
 		os.mkdir(DB_PATH)
-
+	
 	Base.metadata.create_all(bind=ENGINE)
 
 
@@ -28,7 +28,7 @@ def get_db():
 	Create session/connection for each request
 	"""
 	database = SESSION()
-
+	
 	try:
 		yield database
 	finally:
