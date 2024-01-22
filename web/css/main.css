@@ -81,7 +81,11 @@ body {
 }
 
 .task {
-    display: flex;
+    display: block;
+    width: 410px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     cursor: pointer;
     padding: 10px;
     border: 1px solid #ccc;

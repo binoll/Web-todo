@@ -65,7 +65,7 @@ async def add(database: Session = Depends(get_db),
     Add new todo
     """
     if not title:
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Title field is empty!")
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Title field is empty!')
 
     todo = models.Todo(title=title, description=description, tag=tag)
 
@@ -102,7 +102,7 @@ async def edit_post(database: Session = Depends(get_db),
     Edit existed todo
     """
     if not title:
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Title field is empty!")
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail='Title field is empty!')
 
     todo = database.query(models.Todo).filter(models.Todo.id == todo_id).first()
 
