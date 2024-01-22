@@ -28,8 +28,10 @@
 
     <div class="navigation">
         <form action="/list" method="get">
-            <button class="button" name="page" type="submit" value="{{ page - 1 }}" {% if page == 0 %}disabled{% endif %}>PREV</button>
-            <button class="button" name="page" type="submit" value="{{ page + 1 }}" {% if page == total_pages - 1 %}disabled{% endif %}>NEXT</button>
+            {% if total_todos > 10 %}
+            <button class="button" name="page" type="submit" value="{{ page - 1 }}"{% if page == 0 %}disabled{% endif %}>PREV</button>
+            <button class="button" name="page" type="submit" value="{{ page + 1 }}"{% if page == total_pages - 1 %}disabled{% endif %}>NEXT</button>
+            {% endif %}
         </form>
     </div>
 </div>

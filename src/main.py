@@ -50,8 +50,10 @@ async def list(request: Request,
     end_idx = (page + 1) * page_limit
     todos_on_page = todo.slice(start_idx, end_idx).all()
 
-    return templates.TemplateResponse('list.html', {'request': request, 'todos': todos_on_page, 'page': page,
-                                                    'total_pages': total_pages})
+    return templates.TemplateResponse('list.html',
+                                      {'request': request, 'total_todos': total_todos, 'todos': todos_on_page,
+                                       'page': page,
+                                       'total_pages': total_pages})
 
 
 @app.post('/add')
@@ -75,7 +77,7 @@ async def add(database: Session = Depends(get_db),
     return RedirectResponse(url=app.url_path_for('home'), status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app.get('/edit/{id}')
+@app.get('/edit/{todo_id}')
 async def edit_get(request: Request,
                    database: Session = Depends(get_db),
                    todo_id: int = Path(gt=0)) -> templates.TemplateResponse:
@@ -86,10 +88,10 @@ async def edit_get(request: Request,
 
     logger.info(f'Editing todo: {todo}.')
 
-    return templates.TemplateResponse('edit.html', {'request': request, 'todos': todo, 'tags': Tags})
+    return templates.TemplateResponse('edit.html', {'request': request, 'todo': todo, 'tags': Tags})
 
 
-@app.post('/edit/{id}')
+@app.post('/edit/{todo_id}')
 async def edit_post(database: Session = Depends(get_db),
                     todo_id: int = Path(gt=0),
                     title: str = Form(default='', max_length=500),
@@ -122,7 +124,7 @@ async def edit_post(database: Session = Depends(get_db),
     return RedirectResponse(url=app.url_path_for('list'), status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app.get('/delete/{id}')
+@app.get('/delete/{todo_id}')
 async def delete(todo_id: int = Path(gt=0),
                  database: Session = Depends(get_db)):
     """
