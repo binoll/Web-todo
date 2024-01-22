@@ -14,22 +14,22 @@ SESSION = sessionmaker(autocommit=False, autoflush=False, bind=ENGINE)
 
 
 def init_db():
-	"""
-	Init database, create all models as tables
-	"""
-	if not os.path.exists(DB_PATH) or not os.path.isdir(DB_PATH):
-		os.mkdir(DB_PATH)
-	
-	Base.metadata.create_all(bind=ENGINE)
+    """
+    Init database, create all models as tables
+    """
+    if not os.path.exists(DB_PATH) or not os.path.isdir(DB_PATH):
+        os.mkdir(DB_PATH)
+
+    Base.metadata.create_all(bind=ENGINE)
 
 
 def get_db():
-	"""
-	Create session/connection for each request
-	"""
-	database = SESSION()
-	
-	try:
-		yield database
-	finally:
-		database.close()
+    """
+    Create session/connection for each request
+    """
+    database = SESSION()
+
+    try:
+        yield database
+    finally:
+        database.close()
