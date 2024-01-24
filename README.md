@@ -1,6 +1,8 @@
 # Description
 
-This is a web-based task management application.
+This is a web-based task management application. 
+The application is written using the "FastAPI" framework. 
+There is also a "generator" script that creates 20 todos.
 
 ## Documentation
 
