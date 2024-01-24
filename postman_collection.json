@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "ba68ae1b-6334-48fa-ad8b-d1ab34e5099d",
+		"name": "fastapi-collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31367159"
+	},
+	"item": [
+		{
+			"name": "root page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip_adress}}/",
+					"protocol": "http",
+					"host": [
+						"{{ip_adress}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "{{add_todo_title}}",
+							"type": "text"
+						},
+						{
+							"key": "tag",
+							"value": "{{add_todo_tag}}",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "{{add_todo_description}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{ip_adress}}/add",
+					"protocol": "http",
+					"host": [
+						"{{ip_adress}}"
+					],
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edition page",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://{{ip_adress}}/edit/{{id_todo}}",
+					"protocol": "http",
+					"host": [
+						"{{ip_adress}}"
+					],
+					"path": [
+						"edit",
+						"{{id_todo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edited todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "{{edit_todo_title}}"
+						},
+						{
+							"key": "tag",
+							"value": "{{edit_todo_tag}}"
+						},
+						{
+							"key": "description",
+							"value": "{{edit_todo_description}}"
+						},
+						{
+							"key": "completed",
+							"value": "{{edit_todo_completed}}"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{ip_adress}}/edit/{{id_todo}}",
+					"protocol": "http",
+					"host": [
+						"{{ip_adress}}"
+					],
+					"path": [
+						"edit",
+						"{{id_todo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip_adress}}/delete/{{id_todo}}",
+					"protocol": "http",
+					"host": [
+						"{{ip_adress}}"
+					],
+					"path": [
+						"delete",
+						"{{id_todo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list page",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "skip",
+							"value": "{{skip}}",
+							"type": "text"
+						},
+						{
+							"key": "limit",
+							"value": "{{limit}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{ip_adress}}/list",
+					"protocol": "http",
+					"host": [
+						"{{ip_adress}}"
+					],
+					"path": [
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "ip_adress",
+			"value": "127.0.0.1:8000 "
+		},
+		{
+			"key": "id_todo",
+			"value": "1"
+		},
+		{
+			"key": "add_todo_title",
+			"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+		},
+		{
+			"key": "add_todo_tag",
+			"value": "study",
+			"type": "string"
+		},
+		{
+			"key": "add_todo_description",
+			"value": "Donec imperdiet, nunc a fringilla sagittis, tellus nunc sollicitudin justo, vitae faucibus orci risus et lectus. Vivamus vulputate ipsum eu tristique semper. Nunc venenatis purus quis lacinia rhoncus. Pellentesque sed faucibus ipsum. Nulla placerat congue placerat. Praesent ac metus elit. Aenean laoreet justo a odio cursus, at pretium urna ornare. Nullam sollicitudin placerat dolor, at laoreet tortor hendrerit vel. Integer at convallis ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam placerat, quam quis cursus aliquet, massa nibh porta sem, et iaculis nulla mi eu orci. Curabitur eu pretium tortor. In id pellentesque est. Quisque auctor mauris mauris, id consequat tortor accumsan sit amet. Fusce lectus dui, bibendum at tortor ut, pretium ultricies ipsum. Vivamus tincidunt, lorem in congue ultrices, nulla arcu iaculis ex, id placerat libero felis dignissim erat.",
+			"type": "string"
+		},
+		{
+			"key": "edit_todo_title",
+			"value": "Phasellus non leo turpis. Nam ipsum est, tristique id nulla in, mollis maximus tellus."
+		},
+		{
+			"key": "edit_todo_tag",
+			"value": "plans",
+			"type": "string"
+		},
+		{
+			"key": "edit_todo_description",
+			"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at mauris at purus rutrum dignissim. Suspendisse porttitor eros in ligula pellentesque, vitae tristique nisl mollis. Suspendisse vel luctus velit. Praesent odio augue, ultricies sit amet finibus vel, rutrum a quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque quis interdum lectus, non laoreet ligula. Nullam ultrices vulputate leo aliquam maximus. Donec at condimentum mauris. Mauris sit amet metus elit. Sed eleifend orci quis pharetra aliquam. Nullam vestibulum turpis sed nulla consequat, semper pellentesque magna mattis. Mauris dui leo, facilisis nec sapien id, dapibus pellentesque enim. Ut ac lectus ipsum."
+		},
+		{
+			"key": "edit_todo_completed",
+			"value": "true"
+		},
+		{
+			"key": "skip",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "limit",
+			"value": "10",
+			"type": "string"
+		}
+	]
+}
