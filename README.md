@@ -8,7 +8,7 @@ This is a web-based task management application.
 [Swagger UI documentation](http://127.0.0.1:8000/docs)\
 [ReDoc documentation](http://127.0.0.1:8000/redoc)
 
-## Dependencies
+## Dependencies app
 
 ```bash
 pip install -r requirements.txt
@@ -18,6 +18,18 @@ pip install -r requirements.txt
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+## Dependencies generator
+
+```bash
+pip install -r generator/requirements.txt
+```
+
+### With python venv:
+
+```bash
+python -m pip install -r generator/requirements.txt
 ```
 
 ## App
@@ -40,21 +52,21 @@ sudo docker build -t web-todo .
 sudo docker run --rm -p 80:80 -v "${PWD}/database":/database web-todo
 ```
 
-## Script
+## Generator
 
 ### Run
 
 ``` bash
-python generator/generator.py 
+python generator/generator.py
 ```
 
-### Building script docker image
+### Building generator docker image
 
 ``` bash
 sudo docker build -t generator generator
 ```
 
-### Start script with docker
+### Start generator with docker
 
 ``` bash
 sudo docker run --rm --network=host generator
