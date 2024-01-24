@@ -2,14 +2,14 @@ import lorem
 import requests
 
 GENERATION_COUNT = 20
-url = 'http://localhost:8000/add'
+url = 'http://localhost/add'
 
 
 def generate_title():
 	return lorem.sentence()
 
 
-for _ in range(GENERATION_COUNT):
+for i in range(GENERATION_COUNT):
 	payload = {
 		'title': generate_title()
 	}

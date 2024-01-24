@@ -4,7 +4,6 @@ COPY requirements.txt /requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-COPY src /src
-COPY web /web
+COPY generator.py /generator.py
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--reload", "--port", "80"]
+CMD ["python", "generator.py"]

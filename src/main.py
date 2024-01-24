@@ -124,7 +124,7 @@ async def edit_post(database: Session = Depends(get_db),
     return RedirectResponse(url=app.url_path_for('list'), status_code=status.HTTP_303_SEE_OTHER)
 
 
-@app.get('/delete/{todo_id}')
+@app.delete('/delete/{todo_id}')
 async def delete(todo_id: int = Path(gt=0),
                  database: Session = Depends(get_db)):
     """
