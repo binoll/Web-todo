@@ -34,7 +34,7 @@ sudo docker build -t web-todo .
 sudo docker run --rm -p 80:80 -v "${PWD}/database":/database web-todo
 ```
 
-## Scripts
+## Script
 
 ### Run
 
