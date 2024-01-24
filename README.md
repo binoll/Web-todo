@@ -14,21 +14,21 @@ This is a web-based task management application.
 python -m pip install -r requirements.txt
 ```
 
-## Run
+## App
+
+### Run app
 
 ```bash
 uvicorn src.main:app --reload
 ```
 
-## Docker
-
-### Building docker image
+### Building app docker image
 
 ``` bash
 sudo docker build -t web-todo .
 ```
 
-### Start docker
+### Start app with docker
 
 ``` bash
 sudo docker run --rm -p 80:80 -v "${PWD}/database":/database web-todo
