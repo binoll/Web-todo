@@ -11,6 +11,12 @@ This is a web-based task management application.
 ## Dependencies
 
 ```bash
+pip install -r requirements.txt
+```
+
+### With python venv:
+
+```bash
 python -m pip install -r requirements.txt
 ```
 
