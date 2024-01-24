@@ -3,9 +3,9 @@
 <div id="taskInput" class="tab-content">
     <h2>EDIT TODOS</h2>
     <form class="forms" action="/edit/{{ todo.id }}" method="post">
-        <input type="text" name="title" placeholder="Enter title of todo..." required>
+        <textarea class="textarea" type="text" name="title" placeholder="Enter title of todo..." required>{{ todo.title }}</textarea>
         <textarea class="textarea" rows="12" cols="50" minlength="1" maxlength="10000" type="text" name="description"
-                  placeholder="Enter description of todo..."></textarea>
+                  placeholder="Enter description of todo...">{{ todo.description }}</textarea>
         <select name="tag">
             {% for tag in tags %}
             <option value="{{ tag.name }}">
