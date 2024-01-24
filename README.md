@@ -45,11 +45,11 @@ python generator/generator.py
 ### Building script docker image
 
 ``` bash
-sudo docker build -t web-todo generator generator
+sudo docker build -t generator generator
 ```
 
 ### Start script with docker
 
 ``` bash
-sudo docker run --rm --network=host web-todo
+sudo docker run --rm --network=host generator
 ```
