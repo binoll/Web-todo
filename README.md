@@ -5,6 +5,7 @@
 This is a web-based task management application. 
 The application is written using the "FastAPI" framework. 
 There is also a "generator" script that creates 20 todos.
+The handles were tested using "postman".
 
 ## Documentation
 
