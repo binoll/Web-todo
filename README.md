@@ -3,7 +3,7 @@
 ## Overview
 
 This is a web-based task management application. 
-The application is written using the "FastAPI" framework. 
+The application is written using the "FastAPI" framework.
 There is also a "generator" script that creates 20 todos.
 The handles were tested using "postman".
 
@@ -13,31 +13,21 @@ The handles were tested using "postman".
 [Swagger UI documentation](http://127.0.0.1:8000/docs)\
 [ReDoc documentation](http://127.0.0.1:8000/redoc)
 
-## Dependencies app
+## Dependencies
 
-```bash
-pip install -r requirements.txt
-```
-
-### With python venv:
+### Install app dependencies
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## Dependencies generator
-
-```bash
-pip install -r generator/requirements.txt
-```
-
-### With python venv:
+### Install generator dependencies
 
 ```bash
 python -m pip install -r generator/requirements.txt
 ```
 
-## App
+## Run
 
 ### Run app
 
@@ -45,34 +35,29 @@ python -m pip install -r generator/requirements.txt
 uvicorn src.main:app --reload
 ```
 
-### Building app docker image
-
-``` bash
-sudo docker build -t web-todo .
-```
-
-### Start app with docker
-
-``` bash
-sudo docker run --rm -p 80:80 -v "${PWD}/database":/database web-todo
-```
-
-## Generator
-
-### Run
+### Run generator
 
 ``` bash
 python generator/generator.py
 ```
 
-### Building generator docker image
+## Run with docker
+
+### Run app
+
+``` bash
+sudo docker build -t web-todo .
+```
+
+``` bash
+sudo docker run --rm -p 8000:8000 -v "${PWD}/database":/database web-todo
+```
+
+### Run generator
 
 ``` bash
 sudo docker build -t generator generator
 ```
-
-### Start generator with docker
-
 ``` bash
 sudo docker run --rm --network=host generator
 ```

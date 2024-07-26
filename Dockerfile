@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 COPY src /src
 COPY web /web
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--reload", "--port", "80"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--reload", "--port", "8000"]
