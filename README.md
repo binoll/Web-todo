@@ -7,12 +7,6 @@ The application is written using the "FastAPI" framework.
 There is also a "generator" script that creates 20 todos.
 The handles were tested using "postman".
 
-## Documentation
-
-[FastAPI tutorial](https://fastapi.tiangolo.com/ru/tutorial/)\
-[Swagger UI documentation](http://127.0.0.1:8000/docs)\
-[ReDoc documentation](http://127.0.0.1:8000/redoc)
-
 ## Dependencies
 
 ### Install app dependencies
