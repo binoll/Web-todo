@@ -1,0 +1,39 @@
+services:
+  elasticsearch:
+    image: elasticsearch:8.12.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node # Работать в одиночном узле (без кластера)
+      - xpack.security.enabled=false # Отключить встроенную систему безопасности X-Pack (аутентификацию и авторизацию)
+      - xpack.security.http.ssl.enabled=false
+    volumes:
+      - esdata:/usr/share/elasticsearch/data # Используем именованный том
+    networks:
+      - elk-network
+    ports:
+      - 9200:9200
+    healthcheck: # Проверка готовности Elasticsearch
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  kibana:
+    image: kibana:8.12.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200  # Указываем URL Elasticsearch
+    networks:
+      - elk-network
+    ports:
+      - 5601:5601  # Порт для Kibana
+    depends_on:
+      elasticsearch:
+        condition: service_healthy # Kibana ждет, пока Elasticsearch не станет здоровым
+
+volumes:
+  esdata: # Именованный том для данных Elasticsearch
+
+networks:
+  elk-network:
+    driver: bridge
